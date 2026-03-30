@@ -76,7 +76,21 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <p>© 2026 Ishoda Cellular. All rights reserved.</p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <p>© 2026 Ishoda Cellular. All rights reserved.</p>
+            <span className="hidden md:block text-white/20">|</span>
+            <p>
+              Developed by{' '}
+              <a 
+                href="https://oshanjr.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-primary hover:underline transition-all font-medium"
+              >
+                oshanjr
+              </a>
+            </p>
+          </div>
           <div className="flex items-center gap-6">
             <Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
             <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
