@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0A0A0A] border-t border-white/10 pt-16 pb-8">
+    <footer className="bg-[#0A0A0A] border-t border-white/10 pt-16 pb-40 md:pb-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand Info */}
@@ -75,26 +75,29 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-            <p>© 2026 Ishoda Cellular. All rights reserved.</p>
-            <span className="hidden md:block text-white/20">|</span>
-            <p>
-              Developed by{' '}
-              <a 
-                href="https://oshanjr.vercel.app/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-primary hover:underline transition-all font-medium"
-              >
-                oshanjr
-              </a>
-            </p>
-          </div>
-          <div className="flex items-center gap-6">
-            <Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
-            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link to="/cookies" className="hover:text-primary transition-colors">Cookie Policy</Link>
+        <div className="pt-8 border-t border-white/10 flex flex-col items-center gap-8 text-sm text-muted-foreground pb-20 md:pb-0">
+          <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between md:w-full">
+            <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
+              <p className="text-xs opacity-70">© 2026 Ishoda Cellular. All rights reserved.</p>
+              <span className="hidden md:block text-white/20">|</span>
+              <div className="flex items-center gap-2 bg-primary/10 px-6 py-3 rounded-full border border-primary/20 shadow-lg shadow-primary/5">
+                <span className="text-xs text-white/80">Developed by</span>
+                <a 
+                  href="https://oshanjr.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-primary hover:text-primary/80 transition-colors font-bold underline underline-offset-4 text-sm"
+                >
+                  oshanjr
+                </a>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-6 text-xs font-medium">
+              <Link to="/terms" className="hover:text-primary transition-colors">Terms</Link>
+              <Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
+              <Link to="/cookies" className="hover:text-primary transition-colors">Cookies</Link>
+            </div>
           </div>
         </div>
       </div>
