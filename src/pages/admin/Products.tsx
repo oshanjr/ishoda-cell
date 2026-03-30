@@ -15,151 +15,101 @@ const PRODUCTS = [
 
 export default function Products() {
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="space-y-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white">Products</h1>
-          <p className="text-muted-foreground mt-2">Manage your mobile phones and accessories.</p>
+          <h1 className="text-4xl font-bold tracking-tight text-white">Products</h1>
+          <p className="text-muted-foreground mt-1">Manage your mobile phones and accessories inventory.</p>
         </div>
         
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="bg-primary hover:bg-primary/90 text-white">
+            <Button className="bg-primary hover:bg-primary/90 text-white h-11 px-6 rounded-xl shadow-lg shadow-primary/20">
               <Plus className="w-4 h-4 mr-2" />
               Add Product
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-[#121212] border-white/10 text-white max-w-2xl">
+          <DialogContent className="bg-[#121212] border-white/10 text-white max-w-2xl rounded-2xl">
             <DialogHeader>
-              <DialogTitle>Add New Product</DialogTitle>
+              <DialogTitle className="text-xl">Add New Product</DialogTitle>
             </DialogHeader>
-            <div className="grid grid-cols-2 gap-4 py-4">
+            <div className="grid grid-cols-2 gap-6 py-6">
               <div className="grid gap-2 col-span-2">
-                <Label htmlFor="name">Product Name</Label>
-                <Input id="name" placeholder="e.g. Honor Magic 6 Pro" className="bg-[#0A0A0A] border-white/10" />
+                <Label htmlFor="name" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Product Name</Label>
+                <Input id="name" placeholder="e.g. Honor Magic 6 Pro" className="bg-[#0A0A0A] border-white/10 h-12 rounded-xl focus:border-primary/50" />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="brand">Brand</Label>
-                <select id="brand" className="flex h-10 w-full rounded-md border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                <Label htmlFor="brand" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Brand</Label>
+                <select id="brand" className="flex h-12 w-full rounded-xl border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                   <option value="honor">Honor</option>
                   <option value="samsung">Samsung</option>
                   <option value="apple">Apple</option>
                 </select>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="price">Price (Rs.)</Label>
-                <Input id="price" type="number" placeholder="0.00" className="bg-[#0A0A0A] border-white/10" />
+                <Label htmlFor="price" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Price (Rs.)</Label>
+                <Input id="price" type="number" placeholder="0.00" className="bg-[#0A0A0A] border-white/10 h-12 rounded-xl focus:border-primary/50" />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="stock">Stock Quantity</Label>
-                <Input id="stock" type="number" placeholder="0" className="bg-[#0A0A0A] border-white/10" />
+                <Label htmlFor="stock" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Stock Quantity</Label>
+                <Input id="stock" type="number" placeholder="0" className="bg-[#0A0A0A] border-white/10 h-12 rounded-xl focus:border-primary/50" />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="status">Status</Label>
-                <select id="status" className="flex h-10 w-full rounded-md border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                <Label htmlFor="status" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Status</Label>
+                <select id="status" className="flex h-12 w-full rounded-xl border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                   <option value="in_stock">In Stock</option>
                   <option value="low_stock">Low Stock</option>
                   <option value="out_of_stock">Out of Stock</option>
                 </select>
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor="storage">Storage</Label>
-                <Input id="storage" placeholder="e.g. 256GB" className="bg-[#0A0A0A] border-white/10" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="ram">RAM</Label>
-                <Input id="ram" placeholder="e.g. 12GB" className="bg-[#0A0A0A] border-white/10" />
-              </div>
             </div>
-            <DialogFooter>
-              <Button variant="outline" className="border-white/10 hover:bg-white/5">Cancel</Button>
-              <Button className="bg-primary text-white hover:bg-primary/90">Save Product</Button>
+            <DialogFooter className="gap-3">
+              <Button variant="outline" className="border-white/10 hover:bg-white/5 h-11 px-6 rounded-xl">Cancel</Button>
+              <Button className="bg-primary text-white hover:bg-primary/90 h-11 px-6 rounded-xl">Save Product</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
       </div>
 
-      <div className="bg-[#121212] border border-white/10 rounded-lg overflow-hidden">
+      <div className="bg-[#121212] border border-white/5 rounded-2xl overflow-hidden shadow-xl">
         <Table>
-          <TableHeader className="bg-white/5">
-            <TableRow className="border-white/10 hover:bg-transparent">
-              <TableHead className="text-muted-foreground">Name</TableHead>
-              <TableHead className="text-muted-foreground">Brand</TableHead>
-              <TableHead className="text-muted-foreground">Price</TableHead>
-              <TableHead className="text-muted-foreground">Stock</TableHead>
-              <TableHead className="text-muted-foreground">Status</TableHead>
-              <TableHead className="text-right text-muted-foreground">Actions</TableHead>
+          <TableHeader className="bg-white/[0.02]">
+            <TableRow className="border-white/5 hover:bg-transparent h-14">
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pl-6">Product</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Brand</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Price</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Stock</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Status</TableHead>
+              <TableHead className="text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground pr-6">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {PRODUCTS.map((product) => (
-              <TableRow key={product.id} className="border-white/10 hover:bg-white/5 transition-colors">
-                <TableCell className="font-medium text-white">{product.name}</TableCell>
-                <TableCell className="text-muted-foreground">{product.brand}</TableCell>
-                <TableCell className="text-white">Rs. {product.price.toLocaleString()}</TableCell>
-                <TableCell className="text-muted-foreground">{product.stock}</TableCell>
+              <TableRow key={product.id} className="border-white/5 hover:bg-white/[0.02] transition-colors h-20">
+                <TableCell className="pl-6">
+                  <div className="font-semibold text-white">{product.name}</div>
+                  <div className="text-[10px] text-muted-foreground uppercase tracking-widest mt-0.5">ID: {product.id}</div>
+                </TableCell>
+                <TableCell className="text-muted-foreground font-medium">{product.brand}</TableCell>
+                <TableCell className="text-white font-bold">Rs. {product.price.toLocaleString()}</TableCell>
+                <TableCell className="text-muted-foreground">{product.stock} units</TableCell>
                 <TableCell>
                   <Badge 
-                    variant={product.status === 'In Stock' ? 'default' : product.status === 'Low Stock' ? 'secondary' : 'destructive'}
                     className={
-                      product.status === 'In Stock' ? 'bg-green-500/20 text-green-500 hover:bg-green-500/30' :
-                      product.status === 'Low Stock' ? 'bg-yellow-500/20 text-yellow-500 hover:bg-yellow-500/30' :
-                      'bg-red-500/20 text-red-500 hover:bg-red-500/30'
+                      product.status === 'In Stock' ? 'bg-green-500/10 text-green-500 border-green-500/20' :
+                      product.status === 'Low Stock' ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20' :
+                      'bg-red-500/10 text-red-500 border-red-500/20'
                     }
                   >
                     {product.status}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-right pr-6">
                   <div className="flex justify-end gap-2">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="ghost" size="icon" className="hover:bg-white/10 text-muted-foreground hover:text-white">
-                          <Edit className="w-4 h-4" />
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="bg-[#121212] border-white/10 text-white max-w-2xl">
-                        <DialogHeader>
-                          <DialogTitle>Edit Product</DialogTitle>
-                        </DialogHeader>
-                        <div className="grid grid-cols-2 gap-4 py-4 text-left">
-                          <div className="grid gap-2 col-span-2">
-                            <Label htmlFor={`edit-name-${product.id}`}>Product Name</Label>
-                            <Input id={`edit-name-${product.id}`} defaultValue={product.name} className="bg-[#0A0A0A] border-white/10" />
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor={`edit-brand-${product.id}`}>Brand</Label>
-                            <select id={`edit-brand-${product.id}`} defaultValue={product.brand.toLowerCase()} className="flex h-10 w-full rounded-md border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                              <option value="honor">Honor</option>
-                              <option value="samsung">Samsung</option>
-                              <option value="apple">Apple</option>
-                              <option value="xiaomi">Xiaomi</option>
-                            </select>
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor={`edit-price-${product.id}`}>Price (Rs.)</Label>
-                            <Input id={`edit-price-${product.id}`} type="number" defaultValue={product.price} className="bg-[#0A0A0A] border-white/10" />
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor={`edit-stock-${product.id}`}>Stock Quantity</Label>
-                            <Input id={`edit-stock-${product.id}`} type="number" defaultValue={product.stock} className="bg-[#0A0A0A] border-white/10" />
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor={`edit-status-${product.id}`}>Status</Label>
-                            <select id={`edit-status-${product.id}`} defaultValue={product.status === 'In Stock' ? 'in_stock' : product.status === 'Low Stock' ? 'low_stock' : 'out_of_stock'} className="flex h-10 w-full rounded-md border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                              <option value="in_stock">In Stock</option>
-                              <option value="low_stock">Low Stock</option>
-                              <option value="out_of_stock">Out of Stock</option>
-                            </select>
-                          </div>
-                        </div>
-                        <DialogFooter>
-                          <Button variant="outline" className="border-white/10 hover:bg-white/5">Cancel</Button>
-                          <Button className="bg-primary text-white hover:bg-primary/90">Save Changes</Button>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
-                    <Button variant="ghost" size="icon" className="hover:bg-red-500/20 text-muted-foreground hover:text-red-500">
+                    <Button variant="ghost" size="icon" className="w-9 h-9 rounded-lg hover:bg-white/5 text-muted-foreground hover:text-white transition-colors">
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon" className="w-9 h-9 rounded-lg hover:bg-red-500/10 text-muted-foreground hover:text-red-500 transition-colors">
                       <Trash2 className="w-4 h-4" />
                     </Button>
                   </div>

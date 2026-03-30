@@ -17,123 +17,89 @@ const CATEGORIES = [
 
 export default function Categories() {
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="space-y-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white">Categories & Brands</h1>
-          <p className="text-muted-foreground mt-2">Manage your product classifications.</p>
+          <h1 className="text-4xl font-bold tracking-tight text-white">Categories & Brands</h1>
+          <p className="text-muted-foreground mt-1">Manage your product classifications and brand partnerships.</p>
         </div>
         
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="bg-primary hover:bg-primary/90 text-white">
+            <Button className="bg-primary hover:bg-primary/90 text-white h-11 px-6 rounded-xl shadow-lg shadow-primary/20">
               <Plus className="w-4 h-4 mr-2" />
               Add New
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-[#121212] border-white/10 text-white">
+          <DialogContent className="bg-[#121212] border-white/10 text-white rounded-2xl">
             <DialogHeader>
-              <DialogTitle>Add Category or Brand</DialogTitle>
+              <DialogTitle className="text-xl">Add Category or Brand</DialogTitle>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
+            <div className="grid gap-6 py-6">
               <div className="grid gap-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="e.g. Smartwatches" className="bg-[#0A0A0A] border-white/10" />
+                <Label htmlFor="name" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Name</Label>
+                <Input id="name" placeholder="e.g. Smartwatches" className="bg-[#0A0A0A] border-white/10 h-12 rounded-xl focus:border-primary/50" />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="type">Type</Label>
-                <select id="type" className="flex h-10 w-full rounded-md border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                <Label htmlFor="type" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Type</Label>
+                <select id="type" className="flex h-12 w-full rounded-xl border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                   <option value="category">Category</option>
                   <option value="brand">Brand</option>
                 </select>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="status">Status</Label>
-                <select id="status" className="flex h-10 w-full rounded-md border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                <Label htmlFor="status" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Status</Label>
+                <select id="status" className="flex h-12 w-full rounded-xl border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
                 </select>
               </div>
             </div>
-            <DialogFooter>
-              <Button variant="outline" className="border-white/10 hover:bg-white/5">Cancel</Button>
-              <Button className="bg-primary text-white hover:bg-primary/90">Save</Button>
+            <DialogFooter className="gap-3">
+              <Button variant="outline" className="border-white/10 hover:bg-white/5 h-11 px-6 rounded-xl">Cancel</Button>
+              <Button className="bg-primary text-white hover:bg-primary/90 h-11 px-6 rounded-xl">Save</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
       </div>
 
-      <div className="bg-[#121212] border border-white/10 rounded-lg overflow-hidden">
+      <div className="bg-[#121212] border border-white/5 rounded-2xl overflow-hidden shadow-xl">
         <Table>
-          <TableHeader className="bg-white/5">
-            <TableRow className="border-white/10 hover:bg-transparent">
-              <TableHead className="text-muted-foreground">Name</TableHead>
-              <TableHead className="text-muted-foreground">Type</TableHead>
-              <TableHead className="text-muted-foreground">Products Count</TableHead>
-              <TableHead className="text-muted-foreground">Status</TableHead>
-              <TableHead className="text-right text-muted-foreground">Actions</TableHead>
+          <TableHeader className="bg-white/[0.02]">
+            <TableRow className="border-white/5 hover:bg-transparent h-14">
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pl-6">Name</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Type</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Products Count</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Status</TableHead>
+              <TableHead className="text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground pr-6">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {CATEGORIES.map((item) => (
-              <TableRow key={item.id} className="border-white/10 hover:bg-white/5 transition-colors">
-                <TableCell className="font-medium text-white">{item.name}</TableCell>
+              <TableRow key={item.id} className="border-white/5 hover:bg-white/[0.02] transition-colors h-20">
+                <TableCell className="pl-6 font-semibold text-white">{item.name}</TableCell>
                 <TableCell>
-                  <Badge variant="outline" className="border-white/10 text-muted-foreground">
+                  <Badge variant="outline" className="bg-white/5 border-white/10 text-muted-foreground text-[10px] uppercase tracking-widest">
                     {item.type}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-muted-foreground">{item.count}</TableCell>
+                <TableCell className="text-muted-foreground font-medium">{item.count} products</TableCell>
                 <TableCell>
                   <Badge 
-                    variant={item.status === 'Active' ? 'default' : 'secondary'}
                     className={
-                      item.status === 'Active' ? 'bg-green-500/20 text-green-500 hover:bg-green-500/30' :
-                      'bg-gray-500/20 text-gray-500 hover:bg-gray-500/30'
+                      item.status === 'Active' ? 'bg-green-500/10 text-green-500 border-green-500/20' :
+                      'bg-gray-500/10 text-gray-500 border-gray-500/20'
                     }
                   >
                     {item.status}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-right pr-6">
                   <div className="flex justify-end gap-2">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="ghost" size="icon" className="hover:bg-white/10 text-muted-foreground hover:text-white">
-                          <Edit className="w-4 h-4" />
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="bg-[#121212] border-white/10 text-white">
-                        <DialogHeader>
-                          <DialogTitle>Edit {item.type}</DialogTitle>
-                        </DialogHeader>
-                        <div className="grid gap-4 py-4">
-                          <div className="grid gap-2">
-                            <Label htmlFor={`edit-name-${item.id}`}>Name</Label>
-                            <Input id={`edit-name-${item.id}`} defaultValue={item.name} className="bg-[#0A0A0A] border-white/10" />
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor={`edit-type-${item.id}`}>Type</Label>
-                            <select id={`edit-type-${item.id}`} defaultValue={item.type.toLowerCase()} className="flex h-10 w-full rounded-md border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                              <option value="category">Category</option>
-                              <option value="brand">Brand</option>
-                            </select>
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor={`edit-status-${item.id}`}>Status</Label>
-                            <select id={`edit-status-${item.id}`} defaultValue={item.status.toLowerCase()} className="flex h-10 w-full rounded-md border border-white/10 bg-[#0A0A0A] px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                              <option value="active">Active</option>
-                              <option value="inactive">Inactive</option>
-                            </select>
-                          </div>
-                        </div>
-                        <DialogFooter>
-                          <Button variant="outline" className="border-white/10 hover:bg-white/5">Cancel</Button>
-                          <Button className="bg-primary text-white hover:bg-primary/90">Save Changes</Button>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
-                    <Button variant="ghost" size="icon" className="hover:bg-red-500/20 text-muted-foreground hover:text-red-500">
+                    <Button variant="ghost" size="icon" className="w-9 h-9 rounded-lg hover:bg-white/5 text-muted-foreground hover:text-white transition-colors">
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon" className="w-9 h-9 rounded-lg hover:bg-red-500/10 text-muted-foreground hover:text-red-500 transition-colors">
                       <Trash2 className="w-4 h-4" />
                     </Button>
                   </div>

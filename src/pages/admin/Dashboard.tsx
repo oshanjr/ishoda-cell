@@ -22,13 +22,20 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-white">Dashboard</h1>
-        <p className="text-muted-foreground mt-2">Overview of your store's performance.</p>
+    <div className="space-y-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-4xl font-bold tracking-tight text-white">Dashboard</h1>
+          <p className="text-muted-foreground mt-1">Overview of your store's performance and recent activity.</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-medium text-muted-foreground">
+            Mar 1, 2026 - Mar 30, 2026
+          </div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {metrics.map((metric, i) => (
           <motion.div
             key={metric.title}
@@ -36,30 +43,38 @@ export default function Dashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
           >
-            <Card className="bg-[#121212] border-white/10">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+            <Card className="bg-[#121212] border-white/5 hover:border-primary/30 transition-all duration-300 group">
+              <CardHeader className="flex flex-row items-center justify-between pb-4 space-y-0">
+                <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   {metric.title}
                 </CardTitle>
-                <metric.icon className="w-4 h-4 text-primary" />
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                  <metric.icon className="w-5 h-5" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">{metric.value}</div>
-                <p className="text-xs text-green-500 mt-1 flex items-center gap-1">
-                  {metric.trend} from last month
-                </p>
+                <div className="text-4xl font-bold text-white tracking-tight">{metric.value}</div>
+                <div className="flex items-center gap-2 mt-3">
+                  <span className="text-xs font-bold text-green-500 bg-green-500/10 px-2.5 py-1 rounded-full">
+                    {metric.trend}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground">vs last month</span>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
-        <Card className="col-span-1 lg:col-span-4 bg-[#121212] border-white/10">
-          <CardHeader>
-            <CardTitle className="text-white">Revenue Overview</CardTitle>
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-8">
+        <Card className="col-span-1 lg:col-span-4 bg-[#121212] border-white/5 overflow-hidden">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle className="text-white">Revenue Overview</CardTitle>
+              <p className="text-xs text-muted-foreground mt-1">Monthly revenue growth in LKR</p>
+            </div>
           </CardHeader>
-          <CardContent className="h-[350px] border-t border-white/5 pt-6">
+          <CardContent className="h-[400px] border-t border-white/5 pt-8 px-6 pb-6">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data}>
                 <defs>
@@ -70,51 +85,66 @@ export default function Dashboard() {
                 </defs>
                 <XAxis 
                   dataKey="name" 
-                  stroke="#888888" 
-                  fontSize={12} 
+                  stroke="#444" 
+                  fontSize={11} 
                   tickLine={false} 
                   axisLine={false} 
+                  dy={10}
                 />
                 <YAxis
-                  stroke="#888888"
-                  fontSize={12}
+                  stroke="#444"
+                  fontSize={11}
                   tickLine={false}
                   axisLine={false}
-                  tickFormatter={(value) => `Rs.${value}`}
+                  tickFormatter={(value) => `Rs.${value/1000}k`}
+                  dx={-10}
                 />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#121212', borderColor: 'rgba(255,255,255,0.1)', color: '#fff' }}
+                  contentStyle={{ 
+                    backgroundColor: '#121212', 
+                    borderColor: 'rgba(255,255,255,0.1)', 
+                    color: '#fff',
+                    borderRadius: '12px',
+                    fontSize: '12px'
+                  }}
                   itemStyle={{ color: '#01A1FF' }}
+                  cursor={{ stroke: 'rgba(255,255,255,0.1)', strokeWidth: 2 }}
                 />
                 <Area
                   type="monotone"
                   dataKey="total"
                   stroke="#01A1FF"
+                  strokeWidth={3}
                   fillOpacity={1}
                   fill="url(#colorTotal)"
+                  animationDuration={2000}
                 />
               </AreaChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
         
-        <Card className="col-span-1 lg:col-span-3 bg-[#121212] border-white/10">
+        <Card className="col-span-1 lg:col-span-3 bg-[#121212] border-white/5 overflow-hidden">
           <CardHeader>
             <CardTitle className="text-white">Recent Sales</CardTitle>
+            <p className="text-xs text-muted-foreground mt-1">Latest transactions from your store</p>
           </CardHeader>
-          <CardContent className="border-t border-white/5 pt-4">
-            <div className="space-y-6">
+          <CardContent className="border-t border-white/5 p-0">
+            <div className="divide-y divide-white/5">
               {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+                <div key={i} className="flex items-center gap-4 px-6 py-5 hover:bg-white/[0.02] transition-colors cursor-pointer group">
+                  <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold group-hover:scale-110 transition-transform">
                     {String.fromCharCode(64 + i)}
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-white">Customer {i}</p>
-                    <p className="text-xs text-muted-foreground">customer{i}@example.com</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white truncate">Customer {i}</p>
+                    <p className="text-xs text-muted-foreground truncate">customer{i}@example.com</p>
                   </div>
-                  <div className="text-sm font-bold text-white">
-                    +Rs. {(Math.random() * 100000 + 50000).toFixed(0)}
+                  <div className="text-right">
+                    <div className="text-sm font-bold text-white">
+                      +Rs. {(Math.random() * 100000 + 50000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </div>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">2 mins ago</p>
                   </div>
                 </div>
               ))}

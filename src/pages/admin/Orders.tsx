@@ -13,86 +13,85 @@ const ORDERS = [
 
 export default function Orders() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-white">Orders</h1>
-        <p className="text-muted-foreground mt-2">Track and manage customer orders.</p>
+        <h1 className="text-4xl font-bold tracking-tight text-white">Orders</h1>
+        <p className="text-muted-foreground mt-1">Track and manage customer orders and fulfillment status.</p>
       </div>
 
-      <div className="bg-[#121212] border border-white/10 rounded-lg overflow-hidden">
+      <div className="bg-[#121212] border border-white/5 rounded-2xl overflow-hidden shadow-xl">
         <Table>
-          <TableHeader className="bg-white/5">
-            <TableRow className="border-white/10 hover:bg-transparent">
-              <TableHead className="text-muted-foreground">Order ID</TableHead>
-              <TableHead className="text-muted-foreground">Customer</TableHead>
-              <TableHead className="text-muted-foreground">Contact</TableHead>
-              <TableHead className="text-muted-foreground">Date</TableHead>
-              <TableHead className="text-muted-foreground">Total</TableHead>
-              <TableHead className="text-muted-foreground">Status</TableHead>
-              <TableHead className="text-right text-muted-foreground">Actions</TableHead>
+          <TableHeader className="bg-white/[0.02]">
+            <TableRow className="border-white/5 hover:bg-transparent h-14">
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pl-6">Order ID</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Customer</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Contact</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Date</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Total</TableHead>
+              <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Status</TableHead>
+              <TableHead className="text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground pr-6">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {ORDERS.map((order) => (
-              <TableRow key={order.id} className="border-white/10 hover:bg-white/5 transition-colors">
-                <TableCell className="font-medium text-white">{order.id}</TableCell>
+              <TableRow key={order.id} className="border-white/5 hover:bg-white/[0.02] transition-colors h-20">
+                <TableCell className="pl-6 font-semibold text-white">{order.id}</TableCell>
                 <TableCell>
-                  <div className="text-white">{order.customer}</div>
-                  <div className="text-xs text-muted-foreground">{order.email}</div>
+                  <div className="font-semibold text-white">{order.customer}</div>
+                  <div className="text-[10px] text-muted-foreground uppercase tracking-widest mt-0.5">{order.email}</div>
                 </TableCell>
-                <TableCell className="text-muted-foreground">{order.phone}</TableCell>
+                <TableCell className="text-muted-foreground font-medium">{order.phone}</TableCell>
                 <TableCell className="text-muted-foreground">{order.date}</TableCell>
-                <TableCell className="text-white">Rs. {order.total.toLocaleString()}</TableCell>
+                <TableCell className="text-white font-bold">Rs. {order.total.toLocaleString()}</TableCell>
                 <TableCell>
                   <Badge 
-                    variant={order.status === 'Completed' ? 'default' : order.status === 'Shipped' ? 'secondary' : 'outline'}
                     className={
-                      order.status === 'Completed' ? 'bg-green-500/20 text-green-500 hover:bg-green-500/30' :
-                      order.status === 'Shipped' ? 'bg-blue-500/20 text-blue-500 hover:bg-blue-500/30' :
-                      'bg-yellow-500/20 text-yellow-500 hover:bg-yellow-500/30 border-yellow-500/50'
+                      order.status === 'Completed' ? 'bg-green-500/10 text-green-500 border-green-500/20' :
+                      order.status === 'Shipped' ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' :
+                      'bg-yellow-500/10 text-yellow-500 border-yellow-500/20'
                     }
                   >
                     {order.status}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-right pr-6">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="ghost" size="icon" className="hover:bg-white/10 text-muted-foreground hover:text-white">
+                      <Button variant="ghost" size="icon" className="w-9 h-9 rounded-lg hover:bg-white/5 text-muted-foreground hover:text-white transition-colors">
                         <Eye className="w-4 h-4" />
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="bg-[#121212] border-white/10 text-white">
+                    <DialogContent className="bg-[#121212] border-white/10 text-white rounded-2xl">
                       <DialogHeader>
-                        <DialogTitle>Order Details - {order.id}</DialogTitle>
+                        <DialogTitle className="text-xl">Order Details - {order.id}</DialogTitle>
                       </DialogHeader>
-                      <div className="space-y-4 py-4">
-                        <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div className="space-y-6 py-6">
+                        <div className="grid grid-cols-2 gap-6 text-sm">
                           <div>
-                            <p className="text-muted-foreground">Customer</p>
-                            <p className="font-medium">{order.customer}</p>
+                            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Customer</p>
+                            <p className="font-medium text-white">{order.customer}</p>
                           </div>
                           <div>
-                            <p className="text-muted-foreground">Date</p>
-                            <p className="font-medium">{order.date}</p>
+                            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Date</p>
+                            <p className="font-medium text-white">{order.date}</p>
                           </div>
                           <div>
-                            <p className="text-muted-foreground">Email</p>
-                            <p className="font-medium">{order.email}</p>
+                            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Email</p>
+                            <p className="font-medium text-white">{order.email}</p>
                           </div>
                           <div>
-                            <p className="text-muted-foreground">Phone</p>
-                            <p className="font-medium">{order.phone}</p>
+                            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Phone</p>
+                            <p className="font-medium text-white">{order.phone}</p>
                           </div>
                         </div>
-                        <div className="border-t border-white/10 pt-4">
-                          <h4 className="font-medium mb-2">Order Items</h4>
-                          <div className="flex justify-between text-sm text-muted-foreground mb-2">
+                        <div className="border-t border-white/5 pt-6">
+                          <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">Order Items</h4>
+                          <div className="flex justify-between text-sm text-white mb-2">
                             <span>1x Honor Magic 6 Pro</span>
-                            <span>Rs. 329,900</span>
+                            <span className="font-medium">Rs. 329,900</span>
                           </div>
-                          <div className="flex justify-between font-bold text-lg border-t border-white/10 pt-2 mt-2">
-                            <span>Total</span>
+                          <div className="flex justify-between font-bold text-xl border-t border-white/5 pt-4 mt-4">
+                            <span className="text-white">Total</span>
                             <span className="text-primary">Rs. {order.total.toLocaleString()}</span>
                           </div>
                         </div>
