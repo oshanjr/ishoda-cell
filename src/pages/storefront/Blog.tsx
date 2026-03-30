@@ -68,7 +68,7 @@ export default function Blog() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8 mb-16">
         {BLOG_POSTS.map((post, i) => (
           <motion.div
             key={post.id}
@@ -84,36 +84,36 @@ export default function Blog() {
                   alt={post.title} 
                   className="w-full h-full transition-transform duration-500 group-hover:scale-110"
                 />
-                <Badge className="absolute top-4 left-4 bg-primary text-white border-none">
+                <Badge className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-primary text-white border-none text-[8px] sm:text-xs">
                   {post.category}
                 </Badge>
               </div>
-              <CardContent className="px-6 py-0 flex flex-col flex-1">
-                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
+              <CardContent className="px-3 py-0 sm:px-6 flex flex-col flex-1">
+                <div className="flex items-center gap-2 sm:gap-4 text-[8px] sm:text-xs text-muted-foreground my-2 sm:my-4">
                   <div className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />
+                    <Calendar className="w-2 h-2 sm:w-3 sm:h-3" />
                     {post.date}
                   </div>
                   <div className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
+                    <Clock className="w-2 h-2 sm:w-3 sm:h-3" />
                     {post.readTime}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                <h3 className="text-xs sm:text-xl font-bold text-white mb-1 sm:mb-3 group-hover:text-primary transition-colors line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-muted-foreground text-sm mb-6 line-clamp-3">
+                <p className="text-[10px] sm:text-sm text-muted-foreground mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-3">
                   {post.excerpt}
                 </p>
-                <div className="mt-auto py-6 border-t border-white/5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">
+                <div className="mt-auto py-3 sm:py-6 border-t border-white/5 flex items-center justify-between">
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-[8px] sm:text-xs">
                       {post.author[0]}
                     </div>
-                    <span className="text-xs font-medium text-white">{post.author}</span>
+                    <span className="text-[8px] sm:text-xs font-medium text-white">{post.author}</span>
                   </div>
-                  <Button variant="link" className="text-primary p-0 h-auto text-xs">
-                    Read More <ChevronRight className="w-3 h-3 ml-1" />
+                  <Button variant="link" className="text-primary p-0 h-auto text-[8px] sm:text-xs">
+                    Read More <ChevronRight className="w-2 h-2 sm:w-3 sm:h-3 ml-0.5 sm:ml-1" />
                   </Button>
                 </div>
               </CardContent>

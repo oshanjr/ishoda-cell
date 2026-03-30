@@ -41,8 +41,8 @@ export default function Cart() {
               transition={{ delay: i * 0.1 }}
             >
               <Card className="bg-[#121212] border-white/10 overflow-hidden">
-                <CardContent className="p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                  <div className="w-24 h-24 bg-[#0A0A0A] rounded-lg p-2 shrink-0">
+                <CardContent className="p-3 sm:p-6 flex flex-row items-center gap-3 sm:gap-6">
+                  <div className="w-16 h-16 sm:w-24 sm:h-24 bg-[#0A0A0A] rounded-lg p-1 sm:p-2 shrink-0">
                     <img 
                       src={item.image} 
                       alt={item.name} 
@@ -51,14 +51,14 @@ export default function Cart() {
                     />
                   </div>
                   
-                  <div className="flex-1 space-y-1">
-                    <h3 className="font-semibold text-lg text-white">{item.name}</h3>
-                    <p className="text-sm text-muted-foreground">{item.color} | {item.storage}</p>
-                    <div className="text-primary font-bold mt-2">Rs. {item.price.toLocaleString()}</div>
+                  <div className="flex-1 min-w-0 space-y-0.5 sm:space-y-1">
+                    <h3 className="font-semibold text-sm sm:text-lg text-white truncate">{item.name}</h3>
+                    <p className="text-[10px] sm:text-sm text-muted-foreground">{item.color} | {item.storage}</p>
+                    <div className="text-primary font-bold mt-1 text-xs sm:text-base">Rs. {item.price.toLocaleString()}</div>
                   </div>
 
-                  <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end mt-4 sm:mt-0">
-                    <div className="flex items-center border border-white/10 rounded-full bg-black/20">
+                  <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 shrink-0">
+                    <div className="flex items-center border border-white/10 rounded-full bg-black/20 scale-75 sm:scale-100">
                       <button 
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         className="p-2 hover:text-primary transition-colors text-muted-foreground"
@@ -111,9 +111,11 @@ export default function Cart() {
                   <span className="font-semibold text-white">Total</span>
                   <span className="text-2xl font-bold text-primary">Rs. {cartTotal().toLocaleString()}</span>
                 </div>
-                <Button className="w-full h-12 text-lg rounded-full bg-primary hover:bg-primary/90 text-white">
-                  Proceed to Checkout
-                </Button>
+                <Link to="/checkout">
+                  <Button className="w-full h-12 text-lg rounded-full bg-primary hover:bg-primary/90 text-white">
+                    Proceed to Checkout
+                  </Button>
+                </Link>
                 <div className="mt-4 text-center text-xs text-muted-foreground">
                   Secure checkout powered by Stripe
                 </div>
