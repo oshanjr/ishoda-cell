@@ -194,19 +194,19 @@ export default function Home() {
               transition={{ delay: i * 0.1 }}
             >
               <Card className="group bg-[#121212] border-white/5 overflow-hidden hover:border-white/20 transition-all duration-300 h-full flex flex-col">
-                <div className="relative aspect-square overflow-hidden bg-[#0A0A0A]">
+                <div className="relative w-full aspect-square overflow-hidden bg-[#0A0A0A]">
                   <Badge className="absolute top-3 left-3 z-10 bg-black/50 backdrop-blur-md border-white/10 text-white hover:bg-black/50 text-[10px]">
                     {product.brand}
                   </Badge>
                   <Image 
                     src={product.image} 
                     alt={product.name} 
-                    className="w-full h-full transition-opacity duration-500 group-hover:opacity-0 absolute inset-0"
+                    className="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 absolute inset-0"
                   />
                   <Image 
                     src={product.hoverImage} 
                     alt={`${product.name} alternate view`} 
-                    className="w-full h-full transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 scale-105"
+                    className="w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 scale-105"
                   />
                 </div>
                 <CardContent className="p-4 flex flex-col flex-1">
@@ -267,7 +267,7 @@ export default function Home() {
             >
               <Card className="bg-[#121212] border-white/5 overflow-hidden hover:border-white/20 transition-all duration-300">
                 <div className="flex flex-col sm:flex-row">
-                  <div className="sm:w-2/5 aspect-video sm:aspect-square overflow-hidden">
+                  <div className="sm:w-2/5 w-full aspect-video sm:aspect-square overflow-hidden">
                     <Image 
                       src={blog.image} 
                       alt={blog.title} 

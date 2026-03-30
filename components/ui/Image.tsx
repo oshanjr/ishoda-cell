@@ -26,7 +26,7 @@ export default function Image({ src, alt, className, fallback, ...props }: Image
         src={error ? (fallback || defaultFallback) : src}
         alt={alt}
         className={cn(
-          "transition-all duration-500",
+          "transition-all duration-500 block w-full h-full object-cover",
           isLoading ? "scale-110 blur-sm opacity-0" : "scale-100 blur-0 opacity-100",
           className
         )}

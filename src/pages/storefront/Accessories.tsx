@@ -88,7 +88,7 @@ export default function Accessories() {
             transition={{ delay: i * 0.05 }}
           >
             <Card className="group bg-[#121212] border-white/5 overflow-hidden hover:border-white/20 transition-all duration-300 h-full flex flex-col">
-              <div className="relative aspect-square overflow-hidden bg-[#0A0A0A]">
+              <div className="relative w-full aspect-square overflow-hidden bg-[#0A0A0A]">
                 <Badge className="absolute top-3 left-3 z-10 bg-black/50 backdrop-blur-md border-white/10 text-white hover:bg-black/50 text-[10px]">
                   {product.brand}
                 </Badge>

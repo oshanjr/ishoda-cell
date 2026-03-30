@@ -78,7 +78,7 @@ export default function Blog() {
             transition={{ delay: i * 0.1 }}
           >
             <Card className="group bg-[#121212] border-white/5 overflow-hidden hover:border-white/20 transition-all duration-300 h-full flex flex-col">
-              <div className="relative aspect-video overflow-hidden">
+              <div className="relative w-full aspect-video overflow-hidden">
                 <Image 
                   src={post.image} 
                   alt={post.title} 
