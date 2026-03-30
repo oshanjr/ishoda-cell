@@ -9,6 +9,7 @@ import Cart from './pages/storefront/Cart';
 import Search from './pages/storefront/Search';
 import Blog from './pages/storefront/Blog';
 import Checkout from './pages/storefront/Checkout';
+import ProductDetail from './pages/storefront/ProductDetail';
 import Dashboard from './pages/admin/Dashboard';
 import Products from './pages/admin/Products';
 import Orders from './pages/admin/Orders';
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="search" element={<Search />} />
           <Route path="blog" element={<Blog />} />
+          <Route path="products/:id" element={<ProductDetail />} />
           <Route path="checkout" element={<Checkout />} />
         </Route>
 

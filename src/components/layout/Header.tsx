@@ -49,10 +49,8 @@ export default function Header() {
           </Link>
           
           <Sheet>
-            <SheetTrigger asChild>
-              <button className="md:hidden p-2 hover:bg-white/5 rounded-full transition-colors">
-                <Menu className="w-5 h-5" />
-              </button>
+            <SheetTrigger className="md:hidden p-2 hover:bg-white/5 rounded-full transition-colors">
+              <Menu className="w-5 h-5" />
             </SheetTrigger>
             <SheetContent side="right" className="bg-background border-white/10 p-0 w-[280px]">
               <SheetHeader className="p-6 border-b border-white/5">
@@ -63,13 +61,16 @@ export default function Header() {
               </SheetHeader>
               <div className="flex flex-col p-4">
                 {navLinks.map((link) => (
-                  <SheetClose asChild key={link.path}>
-                    <Link 
-                      to={link.path} 
-                      className="px-4 py-4 text-lg font-medium hover:text-primary border-b border-white/5 last:border-0 transition-colors"
-                    >
-                      {link.name}
-                    </Link>
+                  <SheetClose 
+                    key={link.path}
+                    render={
+                      <Link 
+                        to={link.path} 
+                        className="px-4 py-4 text-lg font-medium hover:text-primary border-b border-white/5 last:border-0 transition-colors"
+                      />
+                    }
+                  >
+                    {link.name}
                   </SheetClose>
                 ))}
               </div>

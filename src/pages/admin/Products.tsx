@@ -23,12 +23,14 @@ export default function Products() {
         </div>
         
         <Dialog>
-          <DialogTrigger asChild>
-            <Button className="bg-primary hover:bg-primary/90 text-white h-11 px-6 rounded-xl shadow-lg shadow-primary/20">
-              <Plus className="w-4 h-4 mr-2" />
-              Add Product
-            </Button>
-          </DialogTrigger>
+          <DialogTrigger 
+            render={
+              <Button className="bg-primary hover:bg-primary/90 text-white h-11 px-6 rounded-xl shadow-lg shadow-primary/20">
+                <Plus className="w-4 h-4 mr-2" />
+                Add Product
+              </Button>
+            }
+          />
           <DialogContent className="bg-[#121212] border-white/10 text-white max-w-2xl rounded-2xl">
             <DialogHeader>
               <DialogTitle className="text-xl">Add New Product</DialogTitle>

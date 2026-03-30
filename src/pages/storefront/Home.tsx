@@ -7,69 +7,9 @@ import { Input } from '@/components/ui/input';
 import Image from '@/components/ui/Image';
 import { useStore } from '@/src/store/useStore';
 import { Link } from 'react-router-dom';
+import { PRODUCTS, BRANDS } from '@/src/constants';
 
-const BRANDS = [
-  { name: 'Honor', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Honor_Logo.svg/1200px-Honor_Logo.svg.png' },
-  { name: 'Samsung', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/1200px-Samsung_Logo.svg.png' },
-  { name: 'Apple', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1200px-Apple_logo_black.svg.png' },
-  { name: 'Xiaomi', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Xiaomi_logo.svg/1200px-Xiaomi_logo.svg.png' },
-  { name: 'OnePlus', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/OnePlus_logo.svg/1200px-OnePlus_logo.svg.png' },
-];
-
-const FEATURED_PRODUCTS = [
-  {
-    id: '1',
-    name: 'Honor Magic 6 Pro',
-    brand: 'Honor',
-    price: 329900,
-    installments: 12,
-    image: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=800&auto=format&fit=crop',
-    storage: '512GB',
-    ram: '12GB',
-    color: 'Epi Green',
-    warranty: '1 Year Official',
-  },
-  {
-    id: '2',
-    name: 'Samsung Galaxy S24 Ultra',
-    brand: 'Samsung',
-    price: 419900,
-    installments: 24,
-    image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop',
-    storage: '256GB',
-    ram: '12GB',
-    color: 'Titanium Black',
-    warranty: '1 Year Official',
-  },
-  {
-    id: '3',
-    name: 'iPhone 15 Pro Max',
-    brand: 'Apple',
-    price: 459900,
-    installments: 24,
-    image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=800&auto=format&fit=crop',
-    storage: '256GB',
-    ram: '8GB',
-    color: 'Natural Titanium',
-    warranty: '1 Year Apple Care',
-  },
-  {
-    id: '4',
-    name: 'Xiaomi 14 Ultra',
-    brand: 'Xiaomi',
-    price: 349900,
-    installments: 12,
-    image: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=800&auto=format&fit=crop',
-    storage: '512GB',
-    ram: '16GB',
-    color: 'Black',
-    warranty: '1 Year Official',
-  },
-];
+const FEATURED_PRODUCTS = PRODUCTS.slice(0, 4);
 
 const RECENT_BLOGS = [
   {
@@ -94,7 +34,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-24 pb-24">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] md:h-[80vh] flex items-center justify-center overflow-hidden py-20 md:py-0">
+      <section className="relative min-h-[60vh] md:h-[80vh] flex items-center justify-center overflow-hidden py-20 md:py-0">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/95 z-0" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] md:w-[800px] h-[300px] sm:h-[600px] md:h-[800px] bg-primary/20 rounded-full blur-[80px] sm:blur-[120px] opacity-50 z-0" />
         
@@ -133,7 +73,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="flex-1 relative"
+            className="flex-1 relative hidden md:block"
           >
             <div className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] mx-auto aspect-[3/4]">
               <Image 
@@ -197,16 +137,18 @@ export default function Home() {
                   <Badge className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 bg-black/50 backdrop-blur-md border-white/10 text-white hover:bg-black/50 text-[8px] sm:text-[10px]">
                     {product.brand}
                   </Badge>
-                  <Image 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 absolute inset-0"
-                  />
-                  <Image 
-                    src={product.hoverImage} 
-                    alt={`${product.name} alternate view`} 
-                    className="w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 scale-105"
-                  />
+                  <Link to={`/products/${product.id}`}>
+                    <Image 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 absolute inset-0"
+                    />
+                    <Image 
+                      src={product.hoverImage} 
+                      alt={`${product.name} alternate view`} 
+                      className="w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 scale-105"
+                    />
+                  </Link>
                 </div>
                 <CardContent className="p-3 sm:p-4 flex flex-col flex-1">
                   <div className="flex items-center gap-1 mb-1 sm:mb-2">
@@ -217,7 +159,9 @@ export default function Home() {
                     <Star className="w-2 h-2 sm:w-3 sm:h-3 fill-primary text-primary" />
                     <span className="text-[8px] sm:text-[10px] text-muted-foreground ml-1">(124)</span>
                   </div>
-                  <h3 className="font-semibold text-xs sm:text-base leading-tight mb-1 line-clamp-2">{product.name}</h3>
+                  <Link to={`/products/${product.id}`}>
+                    <h3 className="font-semibold text-xs sm:text-base leading-tight mb-1 line-clamp-2 hover:text-primary transition-colors">{product.name}</h3>
+                  </Link>
                   <p className="text-[10px] sm:text-xs text-muted-foreground mb-2 sm:mb-4">{product.storage} | {product.ram}</p>
                   
                   <div className="mt-auto pt-2 sm:pt-4 border-t border-white/5">

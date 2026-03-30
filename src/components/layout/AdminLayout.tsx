@@ -19,10 +19,8 @@ export default function AdminLayout() {
         <header className="h-16 border-b border-white/5 bg-[#121212]/50 backdrop-blur-xl sticky top-0 z-30 flex items-center justify-between px-4 sm:px-8">
           <div className="flex items-center gap-4">
             <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
-              <SheetTrigger asChild>
-                <button className="lg:hidden p-2 rounded-full hover:bg-white/5 text-muted-foreground hover:text-white transition-colors">
-                  <Menu className="w-5 h-5" />
-                </button>
+              <SheetTrigger className="lg:hidden p-2 rounded-full hover:bg-white/5 text-muted-foreground hover:text-white transition-colors">
+                <Menu className="w-5 h-5" />
               </SheetTrigger>
               <SheetContent side="left" className="p-0 bg-[#121212] border-white/5 w-72">
                 <AdminSidebar onNavItemClick={() => setIsSidebarOpen(false)} />

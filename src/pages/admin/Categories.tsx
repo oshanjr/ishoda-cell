@@ -25,12 +25,14 @@ export default function Categories() {
         </div>
         
         <Dialog>
-          <DialogTrigger asChild>
-            <Button className="bg-primary hover:bg-primary/90 text-white h-11 px-6 rounded-xl shadow-lg shadow-primary/20">
-              <Plus className="w-4 h-4 mr-2" />
-              Add New
-            </Button>
-          </DialogTrigger>
+          <DialogTrigger 
+            render={
+              <Button className="bg-primary hover:bg-primary/90 text-white h-11 px-6 rounded-xl shadow-lg shadow-primary/20">
+                <Plus className="w-4 h-4 mr-2" />
+                Add New
+              </Button>
+            }
+          />
           <DialogContent className="bg-[#121212] border-white/10 text-white rounded-2xl">
             <DialogHeader>
               <DialogTitle className="text-xl">Add Category or Brand</DialogTitle>

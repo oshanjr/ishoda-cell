@@ -5,87 +5,8 @@ import Image from '@/components/ui/Image';
 import { ShoppingCart, Star } from 'lucide-react';
 import { useStore } from '@/src/store/useStore';
 import { motion } from 'motion/react';
-
-const PHONES = [
-  {
-    id: '1',
-    name: 'Honor Magic 6 Pro',
-    brand: 'Honor',
-    price: 329900,
-    installments: 12,
-    image: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=800&auto=format&fit=crop',
-    storage: '512GB',
-    ram: '12GB',
-    color: 'Epi Green',
-    warranty: '1 Year Official',
-  },
-  {
-    id: '2',
-    name: 'Samsung Galaxy S24 Ultra',
-    brand: 'Samsung',
-    price: 419900,
-    installments: 24,
-    image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop',
-    storage: '256GB',
-    ram: '12GB',
-    color: 'Titanium Black',
-    warranty: '1 Year Official',
-  },
-  {
-    id: '3',
-    name: 'iPhone 15 Pro Max',
-    brand: 'Apple',
-    price: 459900,
-    installments: 24,
-    image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=800&auto=format&fit=crop',
-    storage: '256GB',
-    ram: '8GB',
-    color: 'Natural Titanium',
-    warranty: '1 Year Apple Care',
-  },
-  {
-    id: '4',
-    name: 'Xiaomi 14 Ultra',
-    brand: 'Xiaomi',
-    price: 349900,
-    installments: 12,
-    image: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=800&auto=format&fit=crop',
-    storage: '512GB',
-    ram: '16GB',
-    color: 'Black',
-    warranty: '1 Year Official',
-  },
-  {
-    id: '5',
-    name: 'Google Pixel 8 Pro',
-    brand: 'Google',
-    price: 299900,
-    installments: 12,
-    image: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=800&auto=format&fit=crop',
-    storage: '256GB',
-    ram: '12GB',
-    color: 'Obsidian',
-    warranty: '1 Year Official',
-  },
-  {
-    id: '6',
-    name: 'OnePlus 12',
-    brand: 'OnePlus',
-    price: 279900,
-    installments: 12,
-    image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=800&auto=format&fit=crop',
-    hoverImage: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop',
-    storage: '512GB',
-    ram: '16GB',
-    color: 'Flowy Emerald',
-    warranty: '1 Year Official',
-  }
-];
+import { Link } from 'react-router-dom';
+import { PRODUCTS } from '@/src/constants';
 
 export default function Phones() {
   const addToCart = useStore((state) => state.addToCart);
@@ -106,7 +27,7 @@ export default function Phones() {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
-        {PHONES.map((product, i) => (
+        {PRODUCTS.map((product, i) => (
           <motion.div
             key={product.id}
             initial={{ opacity: 0, y: 20 }}
@@ -118,16 +39,18 @@ export default function Phones() {
                 <Badge className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 bg-black/50 backdrop-blur-md border-white/10 text-white hover:bg-black/50 text-[8px] sm:text-[10px]">
                   {product.brand}
                 </Badge>
-                <Image 
-                  src={product.image} 
-                  alt={product.name} 
-                  className="w-full h-full transition-opacity duration-500 group-hover:opacity-0 absolute inset-0"
-                />
-                <Image 
-                  src={product.hoverImage} 
-                  alt={`${product.name} alternate view`} 
-                  className="w-full h-full transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 scale-105"
-                />
+                <Link to={`/products/${product.id}`}>
+                  <Image 
+                    src={product.image} 
+                    alt={product.name} 
+                    className="w-full h-full transition-opacity duration-500 group-hover:opacity-0 absolute inset-0"
+                  />
+                  <Image 
+                    src={product.hoverImage} 
+                    alt={`${product.name} alternate view`} 
+                    className="w-full h-full transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 scale-105"
+                  />
+                </Link>
               </div>
               <CardContent className="p-3 sm:p-4 flex flex-col flex-1">
                 <div className="flex items-center gap-1 mb-1 sm:mb-2">
@@ -138,7 +61,9 @@ export default function Phones() {
                   <Star className="w-2 h-2 sm:w-3 sm:h-3 fill-primary text-primary" />
                   <span className="text-[8px] sm:text-[10px] text-muted-foreground ml-1">(124)</span>
                 </div>
-                <h3 className="font-semibold text-xs sm:text-base leading-tight mb-1 line-clamp-2">{product.name}</h3>
+                <Link to={`/products/${product.id}`}>
+                  <h3 className="font-semibold text-xs sm:text-base leading-tight mb-1 line-clamp-2 hover:text-primary transition-colors">{product.name}</h3>
+                </Link>
                 <p className="text-[10px] sm:text-xs text-muted-foreground mb-2 sm:mb-4">{product.storage} | {product.ram}</p>
                 
                 <div className="mt-auto pt-2 sm:pt-4 border-t border-white/5">

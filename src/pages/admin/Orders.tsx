@@ -56,11 +56,13 @@ export default function Orders() {
                 </TableCell>
                 <TableCell className="text-right pr-6">
                   <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="ghost" size="icon" className="w-9 h-9 rounded-lg hover:bg-white/5 text-muted-foreground hover:text-white transition-colors">
-                        <Eye className="w-4 h-4" />
-                      </Button>
-                    </DialogTrigger>
+                    <DialogTrigger 
+                      render={
+                        <Button variant="ghost" size="icon" className="w-9 h-9 rounded-lg hover:bg-white/5 text-muted-foreground hover:text-white transition-colors">
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                      }
+                    />
                     <DialogContent className="bg-[#121212] border-white/10 text-white rounded-2xl">
                       <DialogHeader>
                         <DialogTitle className="text-xl">Order Details - {order.id}</DialogTitle>
