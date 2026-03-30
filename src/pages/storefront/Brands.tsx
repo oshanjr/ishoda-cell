@@ -1,4 +1,5 @@
 import { Card } from '@/components/ui/card';
+import Image from '@/components/ui/Image';
 import { motion } from 'motion/react';
 
 const BRANDS = [
@@ -28,11 +29,10 @@ export default function Brands() {
           >
             <Card className="group relative h-64 overflow-hidden border-white/10 cursor-pointer">
               <div className="absolute inset-0 bg-black/60 z-10 group-hover:bg-black/40 transition-colors" />
-              <img 
+              <Image 
                 src={brand.logo} 
                 alt={brand.name} 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80'; }}
+                className="absolute inset-0 w-full h-full group-hover:scale-110 transition-transform duration-700"
               />
               <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
                 <h2 className="text-4xl font-bold text-white tracking-tight mb-2">{brand.name}</h2>

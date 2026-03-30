@@ -22,6 +22,7 @@ export default function Header() {
           <Link to="/phones" className="text-sm font-medium hover:text-primary transition-colors">Phones</Link>
           <Link to="/accessories" className="text-sm font-medium hover:text-primary transition-colors">Accessories</Link>
           <Link to="/brands" className="text-sm font-medium hover:text-primary transition-colors">Brands</Link>
+          <Link to="/blog" className="text-sm font-medium hover:text-primary transition-colors">Blog</Link>
         </div>
 
         <div className="flex items-center gap-4">

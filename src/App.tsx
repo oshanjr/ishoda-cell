@@ -7,15 +7,18 @@ import Accessories from './pages/storefront/Accessories';
 import Brands from './pages/storefront/Brands';
 import Cart from './pages/storefront/Cart';
 import Search from './pages/storefront/Search';
+import Blog from './pages/storefront/Blog';
 import Dashboard from './pages/admin/Dashboard';
 import Products from './pages/admin/Products';
 import Orders from './pages/admin/Orders';
 import Categories from './pages/admin/Categories';
 import Settings from './pages/admin/Settings';
+import Preloader from './components/ui/Preloader';
 
 export default function App() {
   return (
     <BrowserRouter>
+      <Preloader />
       <Routes>
         {/* Storefront Routes */}
         <Route path="/" element={<StorefrontLayout />}>
@@ -25,6 +28,7 @@ export default function App() {
           <Route path="brands" element={<Brands />} />
           <Route path="cart" element={<Cart />} />
           <Route path="search" element={<Search />} />
+          <Route path="blog" element={<Blog />} />
         </Route>
 
         {/* Admin Routes */}

@@ -1,4 +1,4 @@
-import { Home, Search, ShoppingBag, User, Smartphone } from 'lucide-react';
+import { Home, Search, ShoppingBag, Smartphone, Newspaper } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function MobileNav() {
@@ -6,8 +6,8 @@ export default function MobileNav() {
 
   const navItems = [
     { icon: Home, label: 'Home', path: '/' },
-    { icon: Search, label: 'Search', path: '/search' },
     { icon: Smartphone, label: 'Phones', path: '/phones' },
+    { icon: Newspaper, label: 'Blog', path: '/blog' },
     { icon: ShoppingBag, label: 'Cart', path: '/cart' },
   ];
 

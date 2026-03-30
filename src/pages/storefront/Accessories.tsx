@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import Image from '@/components/ui/Image';
 import { ShoppingCart, Star } from 'lucide-react';
 import { useStore } from '@/src/store/useStore';
 import { motion } from 'motion/react';
@@ -88,42 +89,40 @@ export default function Accessories() {
           >
             <Card className="group bg-[#121212] border-white/5 overflow-hidden hover:border-white/20 transition-all duration-300 h-full flex flex-col">
               <div className="relative aspect-square overflow-hidden bg-[#0A0A0A]">
-                <Badge className="absolute top-4 left-4 z-10 bg-black/50 backdrop-blur-md border-white/10 text-white hover:bg-black/50">
+                <Badge className="absolute top-3 left-3 z-10 bg-black/50 backdrop-blur-md border-white/10 text-white hover:bg-black/50 text-[10px]">
                   {product.brand}
                 </Badge>
-                <img 
+                <Image 
                   src={product.image} 
                   alt={product.name} 
-                  className="object-contain w-full h-full transition-opacity duration-500 group-hover:opacity-0 absolute inset-0 p-2"
-                  onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80'; }}
+                  className="w-full h-full transition-opacity duration-500 group-hover:opacity-0 absolute inset-0"
                 />
-                <img 
+                <Image 
                   src={product.hoverImage} 
                   alt={`${product.name} alternate view`} 
-                  className="object-contain w-full h-full transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 p-2 scale-105"
-                  onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800&q=80'; }}
+                  className="w-full h-full transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 scale-105"
                 />
               </div>
-              <CardContent className="p-6 flex flex-col flex-1">
+              <CardContent className="p-4 flex flex-col flex-1">
                 <div className="flex items-center gap-1 mb-2">
-                  <Star className="w-4 h-4 fill-primary text-primary" />
-                  <Star className="w-4 h-4 fill-primary text-primary" />
-                  <Star className="w-4 h-4 fill-primary text-primary" />
-                  <Star className="w-4 h-4 fill-primary text-primary" />
-                  <Star className="w-4 h-4 fill-primary text-primary" />
-                  <span className="text-xs text-muted-foreground ml-1">(89)</span>
+                  <Star className="w-3 h-3 fill-primary text-primary" />
+                  <Star className="w-3 h-3 fill-primary text-primary" />
+                  <Star className="w-3 h-3 fill-primary text-primary" />
+                  <Star className="w-3 h-3 fill-primary text-primary" />
+                  <Star className="w-3 h-3 fill-primary text-primary" />
+                  <span className="text-[10px] text-muted-foreground ml-1">(89)</span>
                 </div>
-                <h3 className="font-semibold text-lg leading-tight mb-1 line-clamp-2">{product.name}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{product.color}</p>
+                <h3 className="font-semibold text-base leading-tight mb-1 line-clamp-2">{product.name}</h3>
+                <p className="text-xs text-muted-foreground mb-4">{product.color}</p>
                 
                 <div className="mt-auto pt-4 border-t border-white/5">
                   <div className="flex items-end justify-between mb-4">
                     <div>
-                      <div className="text-2xl font-bold text-white">
+                      <div className="text-xl font-bold text-white">
                         Rs. {product.price.toLocaleString()}
                       </div>
                       {product.installments > 1 && (
-                        <div className="text-xs text-primary mt-1">
+                        <div className="text-[10px] text-primary mt-1">
                           From Rs. {Math.round(product.price / product.installments).toLocaleString()}/mo
                         </div>
                       )}
@@ -131,7 +130,7 @@ export default function Accessories() {
                   </div>
                   <Button 
                     onClick={() => addToCart(product)}
-                    className="w-full bg-white text-black hover:bg-gray-200 font-medium group-hover:bg-primary group-hover:text-white transition-colors"
+                    className="w-full h-10 bg-white text-black hover:bg-gray-200 font-medium group-hover:bg-primary group-hover:text-white transition-colors text-sm"
                   >
                     <ShoppingCart className="w-4 h-4 mr-2" />
                     Add to Cart

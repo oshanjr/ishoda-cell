@@ -1,9 +1,12 @@
 import { motion } from 'motion/react';
-import { ChevronRight, Star, ShoppingCart } from 'lucide-react';
+import { ChevronRight, Star, ShoppingCart, Calendar, Clock, Mail, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import Image from '@/components/ui/Image';
 import { useStore } from '@/src/store/useStore';
+import { Link } from 'react-router-dom';
 
 const BRANDS = [
   { name: 'Honor', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Honor_Logo.svg/1200px-Honor_Logo.svg.png' },
@@ -68,11 +71,28 @@ const FEATURED_PRODUCTS = [
   },
 ];
 
+const RECENT_BLOGS = [
+  {
+    id: '1',
+    title: 'Honor Magic 6 Pro: The New King of Smartphone Photography?',
+    excerpt: 'We take a deep dive into the revolutionary Falcon Camera System...',
+    image: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop',
+    date: 'March 25, 2026',
+  },
+  {
+    id: '2',
+    title: 'Top 10 Accessories Every Smartphone Owner Needs in 2026',
+    excerpt: 'From high-speed chargers to premium protective cases...',
+    image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=800&auto=format&fit=crop',
+    date: 'March 22, 2026',
+  },
+];
+
 export default function Home() {
   const addToCart = useStore((state) => state.addToCart);
 
   return (
-    <div className="flex flex-col gap-16 pb-24">
+    <div className="flex flex-col gap-24 pb-24">
       {/* Hero Section */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/95 z-0" />
@@ -98,9 +118,11 @@ export default function Home() {
               Experience the next generation of smartphone photography with the revolutionary Falcon Camera System.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 justify-center md:justify-start">
-              <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 text-white">
-                Shop Now
-              </Button>
+              <Link to="/phones">
+                <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 text-white">
+                  Shop Now
+                </Button>
+              </Link>
               <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-lg rounded-full border-white/20 hover:bg-white/5">
                 Learn More
               </Button>
@@ -114,11 +136,10 @@ export default function Home() {
             className="flex-1 relative"
           >
             <div className="relative w-full max-w-[500px] mx-auto aspect-[3/4]">
-              <img 
+              <Image 
                 src="https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=800&auto=format&fit=crop" 
                 alt="Honor Magic 6 Pro" 
-                className="object-cover w-full h-full rounded-3xl shadow-2xl shadow-primary/20 border border-white/10"
-                onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80'; }}
+                className="w-full h-full rounded-3xl shadow-2xl shadow-primary/20 border border-white/10"
               />
             </div>
           </motion.div>
@@ -129,7 +150,9 @@ export default function Home() {
       <section className="container mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold tracking-tight">Shop by Brand</h2>
-          <Button variant="link" className="text-primary pr-0">View All <ChevronRight className="w-4 h-4 ml-1" /></Button>
+          <Link to="/brands">
+            <Button variant="link" className="text-primary pr-0">View All <ChevronRight className="w-4 h-4 ml-1" /></Button>
+          </Link>
         </div>
         
         <div className="flex overflow-x-auto pb-6 -mx-4 px-4 gap-4 snap-x hide-scrollbar">
@@ -156,7 +179,9 @@ export default function Home() {
       <section className="container mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold tracking-tight">Trending Now</h2>
-          <Button variant="link" className="text-primary pr-0">View All <ChevronRight className="w-4 h-4 ml-1" /></Button>
+          <Link to="/phones">
+            <Button variant="link" className="text-primary pr-0">View All <ChevronRight className="w-4 h-4 ml-1" /></Button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -170,48 +195,46 @@ export default function Home() {
             >
               <Card className="group bg-[#121212] border-white/5 overflow-hidden hover:border-white/20 transition-all duration-300 h-full flex flex-col">
                 <div className="relative aspect-square overflow-hidden bg-[#0A0A0A]">
-                  <Badge className="absolute top-4 left-4 z-10 bg-black/50 backdrop-blur-md border-white/10 text-white hover:bg-black/50">
+                  <Badge className="absolute top-3 left-3 z-10 bg-black/50 backdrop-blur-md border-white/10 text-white hover:bg-black/50 text-[10px]">
                     {product.brand}
                   </Badge>
-                  <img 
+                  <Image 
                     src={product.image} 
                     alt={product.name} 
-                    className="object-contain w-full h-full transition-opacity duration-500 group-hover:opacity-0 absolute inset-0 p-2"
-                    onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80'; }}
+                    className="w-full h-full transition-opacity duration-500 group-hover:opacity-0 absolute inset-0"
                   />
-                  <img 
+                  <Image 
                     src={product.hoverImage} 
                     alt={`${product.name} alternate view`} 
-                    className="object-contain w-full h-full transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 p-2 scale-105"
-                    onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800&q=80'; }}
+                    className="w-full h-full transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0 scale-105"
                   />
                 </div>
-                <CardContent className="p-6 flex flex-col flex-1">
+                <CardContent className="p-4 flex flex-col flex-1">
                   <div className="flex items-center gap-1 mb-2">
-                    <Star className="w-4 h-4 fill-primary text-primary" />
-                    <Star className="w-4 h-4 fill-primary text-primary" />
-                    <Star className="w-4 h-4 fill-primary text-primary" />
-                    <Star className="w-4 h-4 fill-primary text-primary" />
-                    <Star className="w-4 h-4 fill-primary text-primary" />
-                    <span className="text-xs text-muted-foreground ml-1">(124)</span>
+                    <Star className="w-3 h-3 fill-primary text-primary" />
+                    <Star className="w-3 h-3 fill-primary text-primary" />
+                    <Star className="w-3 h-3 fill-primary text-primary" />
+                    <Star className="w-3 h-3 fill-primary text-primary" />
+                    <Star className="w-3 h-3 fill-primary text-primary" />
+                    <span className="text-[10px] text-muted-foreground ml-1">(124)</span>
                   </div>
-                  <h3 className="font-semibold text-lg leading-tight mb-1 line-clamp-2">{product.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">{product.storage} | {product.ram}</p>
+                  <h3 className="font-semibold text-base leading-tight mb-1 line-clamp-2">{product.name}</h3>
+                  <p className="text-xs text-muted-foreground mb-4">{product.storage} | {product.ram}</p>
                   
                   <div className="mt-auto pt-4 border-t border-white/5">
                     <div className="flex items-end justify-between mb-4">
                       <div>
-                        <div className="text-2xl font-bold text-white">
+                        <div className="text-xl font-bold text-white">
                           Rs. {product.price.toLocaleString()}
                         </div>
-                        <div className="text-xs text-primary mt-1">
+                        <div className="text-[10px] text-primary mt-1">
                           From Rs. {Math.round(product.price / product.installments).toLocaleString()}/mo
                         </div>
                       </div>
                     </div>
                     <Button 
                       onClick={() => addToCart(product)}
-                      className="w-full bg-white text-black hover:bg-gray-200 font-medium group-hover:bg-primary group-hover:text-white transition-colors"
+                      className="w-full h-10 bg-white text-black hover:bg-gray-200 font-medium group-hover:bg-primary group-hover:text-white transition-colors text-sm"
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
                       Add to Cart
@@ -223,6 +246,110 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Recent Blogs */}
+      <section className="container mx-auto px-4">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-bold tracking-tight">Latest from Blog</h2>
+          <Link to="/blog">
+            <Button variant="link" className="text-primary pr-0">View All <ChevronRight className="w-4 h-4 ml-1" /></Button>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {RECENT_BLOGS.map((blog, i) => (
+            <motion.div
+              key={blog.id}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="group cursor-pointer"
+            >
+              <Card className="bg-[#121212] border-white/5 overflow-hidden hover:border-white/20 transition-all duration-300">
+                <div className="flex flex-col sm:flex-row">
+                  <div className="sm:w-2/5 aspect-video sm:aspect-square overflow-hidden">
+                    <Image 
+                      src={blog.image} 
+                      alt={blog.title} 
+                      className="w-full h-full transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                  <CardContent className="sm:w-3/5 flex flex-col justify-center px-6 py-0">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+                      <Calendar className="w-3 h-3" />
+                      {blog.date}
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                      {blog.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                      {blog.excerpt}
+                    </p>
+                    <Button variant="link" className="text-primary p-0 h-auto text-xs w-fit">
+                      Read More <ChevronRight className="w-3 h-3 ml-1" />
+                    </Button>
+                  </CardContent>
+                </div>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="container mx-auto px-4">
+        <div className="bg-[#121212] rounded-3xl border border-white/10 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="p-8 md:p-12 space-y-8">
+              <div className="space-y-4">
+                <Badge variant="outline" className="border-primary/50 text-primary bg-primary/10">
+                  Contact Us
+                </Badge>
+                <h2 className="text-3xl font-bold text-white tracking-tight">
+                  Need Help? <br />
+                  <span className="text-primary">We're here for you.</span>
+                </h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  Have a question about a product or your order? Reach out to us and we'll get back to you as soon as possible.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <span className="text-white font-medium">info@ishodacellular.lk</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <span className="text-white font-medium">+94 11 234 5678</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white/5 p-8 md:p-12 border-l border-white/10">
+              <form className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Input placeholder="Name" className="bg-[#0A0A0A] border-white/10 h-12 rounded-xl focus:border-primary/50" />
+                  <Input placeholder="Email" className="bg-[#0A0A0A] border-white/10 h-12 rounded-xl focus:border-primary/50" />
+                </div>
+                <Input placeholder="Subject" className="bg-[#0A0A0A] border-white/10 h-12 rounded-xl focus:border-primary/50" />
+                <textarea 
+                  className="w-full min-h-[120px] bg-[#0A0A0A] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                  placeholder="Your message..."
+                ></textarea>
+                <Button className="w-full h-12 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold">
+                  Send Message
+                </Button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+
