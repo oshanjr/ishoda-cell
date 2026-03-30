@@ -1,7 +1,7 @@
 import { LayoutDashboard, Package, Tags, ShoppingCart, Settings, LogOut } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
-export default function AdminSidebar() {
+export default function AdminSidebar({ onNavItemClick }: { onNavItemClick?: () => void }) {
   const location = useLocation();
 
   const navItems = [
@@ -13,9 +13,9 @@ export default function AdminSidebar() {
   ];
 
   return (
-    <aside className="w-72 bg-[#121212] border-r border-white/5 flex flex-col h-screen sticky top-0 shrink-0">
+    <aside className="w-72 bg-[#121212] border-r border-white/5 flex flex-col h-full shrink-0">
       <div className="p-8">
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group" onClick={onNavItemClick}>
           <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
             IC
           </div>
@@ -36,6 +36,7 @@ export default function AdminSidebar() {
                 <Link
                   key={item.path}
                   to={item.path}
+                  onClick={onNavItemClick}
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
                     isActive 
                       ? 'bg-primary text-white shadow-lg shadow-primary/20' 
@@ -59,6 +60,7 @@ export default function AdminSidebar() {
                 <Link
                   key={item.path}
                   to={item.path}
+                  onClick={onNavItemClick}
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
                     isActive 
                       ? 'bg-primary text-white shadow-lg shadow-primary/20' 
