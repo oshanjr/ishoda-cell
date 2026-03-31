@@ -126,7 +126,7 @@ export default function Checkout() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="postalCode">Postal Code</Label>
-                    <Input name="phone" id="postalCode" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="postal" id="postalCode" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
