@@ -80,13 +80,13 @@ export default function Footer() {
             <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
               <p className="text-xs opacity-70">© 2026 Ishoda Cellular. All rights reserved.</p>
               <span className="hidden md:block text-white/20">|</span>
-              <div className="flex items-center gap-2 bg-primary/10 px-6 py-3 rounded-full border border-primary/20 shadow-lg shadow-primary/5">
-                <span className="text-xs text-white/80">Developed by</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs text-white/60">Developed by</span>
                 <a 
                   href="https://oshanjr.vercel.app/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-primary hover:text-primary/80 transition-colors font-bold underline underline-offset-4 text-sm"
+                  className="text-primary hover:text-primary/80 transition-colors font-semibold text-xs"
                 >
                   oshanjr
                 </a>
