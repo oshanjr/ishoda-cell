@@ -34,37 +34,30 @@ export default function Checkout() {
     e.preventDefault();
     setIsProcessing(true);
 
-    // 1. Grab the form data the user typed in
+    // Extract values using the 'name' attributes we just added
     const formData = new FormData(e.currentTarget);
-    const firstName = formData.get('firstName');
-    const lastName = formData.get('lastName');
-    const address = formData.get('address');
-    const city = formData.get('city');
-    const phone = formData.get('phone');
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
+    const address = formData.get('address') as string;
+    const city = formData.get('city') as string;
+    const phone = formData.get('phone') as string;
 
-    // Combine fields for the Engine
     const fullName = `${firstName} ${lastName}`;
     const fullAddress = `${address}, ${city}`;
 
-    // 2. The Engine Credentials
-    // Make sure your Next.js server is running locally on port 3000, 
-    // or replace this with your actual live deployed URL (e.g., https://api.yourdomain.com)
-    const ENGINE_URL = 'http://localhost:3000'; 
-    const PUBLIC_KEY = 'pub_tenant_6b51b752'; 
+    const ENGINE_URL = 'http://localhost:3000';
+    const PUBLIC_KEY = 'pub_tenant_6b51b752';
 
     try {
-      // 3. Fire the payload to your Central Engine
       const response = await fetch(`${ENGINE_URL}/api/checkout`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           tenant_id: PUBLIC_KEY,
           customer_name: fullName,
           customer_phone: phone,
           customer_address: fullAddress,
-          distance_km: 12 // Hardcoded for this demo, normally you'd calculate this via Maps API
+          distance_km: 12
         })
       });
 
@@ -74,18 +67,13 @@ export default function Checkout() {
       }
 
       const confirmedOrder = await response.json();
-      console.log('✅ Order successful! Engine returned:', confirmedOrder);
-
-      // 4. Success state
-      setIsProcessing(false);
+      alert(`Success! Delivery Fee: Rs. ${confirmedOrder.delivery_fee}`);
       clearCart();
-      alert(`Order placed successfully! Delivery Fee calculated: Rs. ${confirmedOrder.delivery_fee}`);
       navigate('/');
-
     } catch (error: any) {
-      console.error('🚨 Engine rejected order:', error.message);
+      alert(`Error: ${error.message}`);
+    } finally {
       setIsProcessing(false);
-      alert(`Failed to place order: ${error.message}`);
     }
   };
 
@@ -113,33 +101,33 @@ export default function Checkout() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
-                    <Input id="firstName" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="firstName" id="firstName" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name</Label>
-                    <Input id="lastName" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="lastName" id="lastName" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
-                  <Input id="email" type="email" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                  <Input name="email" id="email" type="email" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="address">Shipping Address</Label>
-                  <Input id="address" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                  <Input name="address" id="address" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="city">City</Label>
-                    <Input id="city" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="city" id="city" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="postalCode">Postal Code</Label>
-                    <Input id="postalCode" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="postalCode" id="postalCode" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" type="tel" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="phone" id="phone" type="tel" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                 </div>
               </CardContent>
@@ -155,16 +143,16 @@ export default function Checkout() {
               <CardContent className="p-6 space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="cardNumber">Card Number</Label>
-                  <Input id="cardNumber" placeholder="0000 0000 0000 0000" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                  <Input name="cardNumber" id="cardNumber" placeholder="0000 0000 0000 0000" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="expiry">Expiry Date</Label>
-                    <Input id="expiry" placeholder="MM/YY" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="expiry" id="expiry" placeholder="MM/YY" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="cvv">CVV</Label>
-                    <Input id="cvv" placeholder="123" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="cvv" id="cvv" placeholder="123" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                 </div>
               </CardContent>
@@ -210,8 +198,8 @@ export default function Checkout() {
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 form="checkout-form"
                 disabled={isProcessing}
                 className="w-full h-12 text-lg rounded-full bg-primary hover:bg-primary/90 text-white font-bold"
