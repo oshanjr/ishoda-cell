@@ -41,6 +41,7 @@ export default function Checkout() {
     const address = formData.get('address') as string;
     const city = formData.get('city') as string;
     const phone = formData.get('phone') as string;
+    const postalCode = formData.get('postalCode') as string;
 
     const fullName = `${firstName} ${lastName}`;
     const fullAddress = `${address}, ${city}`;
@@ -126,7 +127,7 @@ export default function Checkout() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="postalCode">Postal Code</Label>
-                    <Input name="postal" id="postalCode" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="postalCode" id="postalCode" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
