@@ -18,16 +18,75 @@ export default function Checkout() {
     return null;
   }
 
-  const handleCheckout = (e: React.FormEvent) => {
+  // const handleCheckout = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsProcessing(true);
+  //   // Simulate payment processing
+  //   setTimeout(() => {
+  //     setIsProcessing(false);
+  //     clearCart();
+  //     alert('Order placed successfully! Thank you for shopping with Ishoda Cellular.');
+  //     navigate('/');
+  //   }, 2000);
+  // };
+
+  const handleCheckout = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsProcessing(true);
-    // Simulate payment processing
-    setTimeout(() => {
+
+    // 1. Grab the form data the user typed in
+    const formData = new FormData(e.currentTarget);
+    const firstName = formData.get('firstName');
+    const lastName = formData.get('lastName');
+    const address = formData.get('address');
+    const city = formData.get('city');
+    const phone = formData.get('phone');
+
+    // Combine fields for the Engine
+    const fullName = `${firstName} ${lastName}`;
+    const fullAddress = `${address}, ${city}`;
+
+    // 2. The Engine Credentials
+    // Make sure your Next.js server is running locally on port 3000, 
+    // or replace this with your actual live deployed URL (e.g., https://api.yourdomain.com)
+    const ENGINE_URL = 'http://localhost:3000'; 
+    const PUBLIC_KEY = 'pub_tenant_6b51b752'; 
+
+    try {
+      // 3. Fire the payload to your Central Engine
+      const response = await fetch(`${ENGINE_URL}/api/checkout`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          tenant_id: PUBLIC_KEY,
+          customer_name: fullName,
+          customer_phone: phone,
+          customer_address: fullAddress,
+          distance_km: 12 // Hardcoded for this demo, normally you'd calculate this via Maps API
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Checkout failed');
+      }
+
+      const confirmedOrder = await response.json();
+      console.log('✅ Order successful! Engine returned:', confirmedOrder);
+
+      // 4. Success state
       setIsProcessing(false);
       clearCart();
-      alert('Order placed successfully! Thank you for shopping with Ishoda Cellular.');
+      alert(`Order placed successfully! Delivery Fee calculated: Rs. ${confirmedOrder.delivery_fee}`);
       navigate('/');
-    }, 2000);
+
+    } catch (error: any) {
+      console.error('🚨 Engine rejected order:', error.message);
+      setIsProcessing(false);
+      alert(`Failed to place order: ${error.message}`);
+    }
   };
 
   return (
