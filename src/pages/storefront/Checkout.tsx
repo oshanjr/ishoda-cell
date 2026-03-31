@@ -34,7 +34,7 @@ export default function Checkout() {
     e.preventDefault();
     setIsProcessing(true);
 
-    // Extract values using the 'name' attributes we just added
+    // 1. Extract data using the 'name' attributes
     const formData = new FormData(e.currentTarget);
     const firstName = formData.get('firstName') as string;
     const lastName = formData.get('lastName') as string;
@@ -44,6 +44,9 @@ export default function Checkout() {
 
     const fullName = `${firstName} ${lastName}`;
     const fullAddress = `${address}, ${city}`;
+
+    // DEBUG: Check your browser console (F12) to see if these are still null
+    console.log("Frontend Package:", { fullName, phone, fullAddress });
 
     const ENGINE_URL = 'http://localhost:3000';
     const PUBLIC_KEY = 'pub_tenant_6b51b752';
@@ -123,7 +126,7 @@ export default function Checkout() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="postalCode">Postal Code</Label>
-                    <Input name="postalCode" id="postalCode" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
+                    <Input name="phone" id="postalCode" required className="bg-[#0A0A0A] border-white/10 rounded-xl" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
